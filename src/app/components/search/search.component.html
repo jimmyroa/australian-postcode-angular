@@ -1,0 +1,117 @@
+<!--CONTAINER-->
+<div class="container">
+
+
+    <!--GET SUBURBS BY POSTCODE-->
+    <div class="form-wrappler">
+        <h1 class="title">Search suburbs by postcode</h1>
+
+        <form [formGroup]="form">
+        
+                <input type="number" class="form-input" formControlName="postcode" placeholder="Postcode" />
+                <br>
+
+                <!--
+                <small *ngIf="postcode.hasError('minlength')">
+                    Postcode requires at least 3 digits
+                </small> 
+                <span class="error-text" *ngIf="postcode.hasError('required')">
+                    Contraseña requerida
+                </span>
+                -->
+                <span class="error-text" *ngIf="form.invalid">
+                    Enter at least 3 digits
+                </span>
+            
+                <br><br>  
+
+         
+                <button class="" type="submit" [disabled]="form.invalid" (click)="getSuburb()">
+                    Search
+                </button>
+           
+
+        </form>
+        <br>
+
+    </div>
+    <!---->
+
+    <br><br>
+
+    <span class="error-text"  *ngIf="noResultsMessage" >
+        0 Results
+    </span>
+       
+
+    <!--SUBURBS POSTCODE SELECTED-->
+    <!--<ng-container  *ngIf="suburbs != null || undefined " >-->
+    <ng-container  *ngIf="suburbs.length >= 1 && suburbSelected ==='' " > 
+        
+        <h1 class="title">Suburbs under postcode: <br>
+            {{postcodeSelected.value}}
+        </h1>
+
+        <div class="wrappler-item">
+        
+            <div class=""  *ngFor="let suburb of suburbs; index as posicion">
+
+                    <div class="item">
+                        <br>
+                        <h2 class="subTitle">{{suburb.name}}</h2>
+                        <p>State: {{suburb.state.name}} {{suburb.state.abbreviation}} </p>    
+                        <p>Locality: {{suburb.locality}}</p>
+                          <!--
+                        <p>Postcode: {{suburb.postcode}}</p>
+                        <p>Latitude: {{suburb.latitude}}</p>
+                        <p>Longitude: {{suburb.longitude}}</p>
+                          -->
+                        <br>
+                        <a (click)="getSuburbs4km( suburb.name, suburb.latitude , suburb.longitude )" >
+                            See suburbs (radius 4km)
+                        </a>
+
+                        <div class="horizontalLine"></div>
+                        <br>
+
+                    </div>
+                <!---->
+
+            </div>
+        </div>
+        
+    </ng-container>
+    <!---->
+
+    <br><br><br>
+
+    <!--SUBURBS WITHIN 4KM OF THE SUBURBS SELECTED-->
+     <div *ngIf="suburbsRadius4km.length > 1 && suburbSelected !='' " >
+            
+        <h1 class="title">Suburbs within 4km of the Suburb: 
+            {{suburbSelected}}
+        </h1>
+        <br>
+
+        <div class="wrappler-item">
+            <div *ngFor="let i of suburbsRadius4km; ">
+            
+                <div class="item">
+                    <h2 class="subTitle">{{i.name}}</h2>
+                    <p>State: {{i.state.name}} {{i.state.abbreviation}} </p>    
+                    <p>Locality: {{i.locality}}</p>
+                    <div class="horizontalLine"></div>
+                    <br>
+                </div>
+
+            </div>
+        </div>
+        
+     </div>
+    <!---->
+
+
+
+
+</div>
+<!--end CONTAINER-->

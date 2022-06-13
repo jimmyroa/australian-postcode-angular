@@ -1,0 +1,15 @@
+{
+    "/suburbs.json*": { 
+           "target" : "http://v0.postcodeapi.com.au",
+           "secure" : true,
+           "logLevel" : "debug",
+           "changeOrigin" : true
+    },
+
+    "/radius.json*": { 
+       "target" : "http://v0.postcodeapi.com.au",
+       "secure" : true,
+       "logLevel" : "debug",
+       "changeOrigin" : true
+}
+ }
